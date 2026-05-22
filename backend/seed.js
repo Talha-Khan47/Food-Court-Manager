@@ -6,6 +6,46 @@ dotenv.config();
 
 const menuItems = [
     {
+        name: "Masala Dosa",
+        description: "Crispy rice-lentil crepe filled with spiced potatoes.",
+        price: 6.99,
+        image: "https://images.unsplash.com/photo-1585238342026-6f9f73ae363f?auto=format&fit=crop&w=800&q=80",
+        category: "Breakfast",
+        isAvailable: true
+    },
+    {
+        name: "Paneer Butter Masala",
+        description: "Cottage cheese cubes in a rich tomato-butter gravy.",
+        price: 10.49,
+        image: "https://images.unsplash.com/photo-1548940924-d377c6a8c2b5?auto=format&fit=crop&w=800&q=80",
+        category: "Lunch",
+        isAvailable: true
+    },
+    {
+        name: "Samosa",
+        description: "Deep-fried pastry filled with spiced potatoes and peas.",
+        price: 3.99,
+        image: "https://images.unsplash.com/photo-1601050690652-39b1ba79d898?auto=format&fit=crop&w=800&q=80",
+        category: "Snacks",
+        isAvailable: true
+    },
+    {
+        name: "Mango Lassi",
+        description: "Refreshing yogurt-based mango drink.",
+        price: 4.50,
+        image: "https://images.unsplash.com/photo-1572358392598-566ffab77fa6?auto=format&fit=crop&w=800&q=80",
+        category: "Juices",
+        isAvailable: true
+    },
+    {
+        name: "Masala Chai",
+        description: "Spiced Indian tea with milk and sugar.",
+        price: 2.99,
+        image: "https://images.unsplash.com/photo-1543138947-945d2e6e2b12?auto=format&fit=crop&w=800&q=80",
+        category: "Tea",
+        isAvailable: true
+    },
+    {
         name: "Classic Cheeseburger",
         description: "Juicy beef patty with melted cheddar, lettuce, tomato, and our special sauce.",
         price: 8.99,

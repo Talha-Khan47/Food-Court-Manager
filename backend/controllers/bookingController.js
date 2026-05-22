@@ -77,8 +77,51 @@ const getAllBookings = async (req, res) => {
     }
 };
 
+// @desc    Update booking status (admin only)
+// @route   PATCH /api/bookings/:id/status
+// @access  Private/Admin
+const updateBookingStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body; // Expected: Confirmed, Cancelled, Completed
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+    // If moving to Cancelled or Completed, free the table
+    if (['Cancelled', 'Completed'].includes(status) && booking.status !== status) {
+      await Table.findByIdAndUpdate(booking.table, { $set: { isBooked: false } });
+    }
+    // If moving to Confirmed, mark table as booked
+    if (status === 'Confirmed') {
+      await Table.findByIdAndUpdate(booking.table, { $set: { isBooked: true } });
+    }
+    booking.status = status;
+    await booking.save();
+    res.json(booking);
+  } catch (error) {
+    console.error('Error updating booking status:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+// @desc    Get all tables with booking status (public)
+// @route   GET /api/bookings/tables
+// @access  Public
+const getAllTables = async (req, res) => {
+  try {
+    const tables = await Table.find().select('-__v');
+    res.json(tables);
+  } catch (error) {
+    console.error('Error fetching tables:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
 module.exports = {
-    createBooking,
-    getMyBookings,
-    getAllBookings
+  createBooking,
+  getMyBookings,
+  getAllBookings,
+  updateBookingStatus,
+  getAllTables
 };
